@@ -28,5 +28,19 @@ Site e documentação do Airflow:
 
 ## Download do repositório
 
-    https://airflow.apache.org/
+    https://github.com/kevinalvez/Desafio_Airflow.git
 
+## Instlação de dependências
+
+    Utilize o arquivo requirements.txt para verificar e instalar dependências necessárias
+
+## Observações
+
+- Verificar o install.sh para instalação do Airflow
+- Alterar caminhos relativos da DAG caso necessário para execução
+- Banco de dados em formato sqlite3
+
+## Melhorias
+
+- Remover códigos py para fora da dag e realizar apenas a chamada de execução
+- Realizar alterações para execução através do Docker
