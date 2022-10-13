@@ -5,6 +5,8 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from airflow import DAG
 from airflow.models import Variable
+import pandas as pd
+import sqlite3
 
 # These args will get passed on to each operator
 # You can override them on a per-task basis during operator initialization
@@ -50,9 +52,18 @@ with DAG(
     dag.doc_md = """
         Esse é o desafio de Airflow da Indicium.
     """
-   
+    
+    def export_output_csv() :
+        conn = sqlite3.connect('./data/Northwind_small.sqlite', isolation_level=None,
+        detect_types=sqlite3.PARSE_COLNAMES)
+        sql_com = """
+            SELECT * FROM "Order"
+        """
+        db_df = pd.read_sql_query(sql_com, conn)
+        db_df.to_csv('./data/output_orders.csv', index=False)
+
     export_final_output = PythonOperator(
         task_id='export_final_output',
-        python_callable=export_final_answer,
+        python_callable=export_output_csv,
         provide_context=True
     )
